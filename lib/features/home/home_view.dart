@@ -40,7 +40,7 @@ class _HomeViewState extends State<HomeView> {
               ),
               Gap(20),
               Row(
-              //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,13 +49,13 @@ class _HomeViewState extends State<HomeView> {
                       Text('Today ',style: getTitleStyle(color: AppColors.blackColor),),
                     ],
                   ),
-                Spacer(),
-                SizedBox(
-                    height: 50,width: 120,
-                    child: CustomButton(text: '+ Add Task', onPressed: (){})),
+                  Spacer(),
+                  SizedBox(
+                      height: 50,width: 120,
+                      child: CustomButton(text: '+ Add Task', onPressed: (){})),
                 ],
               ),
-             Gap(20),
+              Gap(20),
               DatePicker(
                 height:100,
                 width:80,
