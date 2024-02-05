@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
+import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:taskati/core/Widgets/custom_error_dialog.dart';
 import 'package:taskati/core/utils/app_colors.dart';
@@ -10,7 +12,7 @@ import 'package:taskati/core/utils/text_styles.dart';
 import 'package:taskati/features/home/home_view.dart';
 
 String? path;
-String name='';
+String name ='';
 
 class UploadView extends StatefulWidget {
   const UploadView({Key? key}) : super(key: key);
@@ -32,6 +34,10 @@ class _UploadViewState extends State<UploadView> {
             onPressed: () {
 
               if(path != null && name.isNotEmpty){
+                var box =  Hive.box('user');
+                box.put('image', path);
+                box.put('name', name);
+               print( box.get('name'),);
                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>HomeView()));
               }else if(path==null && name.isNotEmpty){
                 showErrorDialog(context, 'Please Upload Your Image');
@@ -95,6 +101,13 @@ class _UploadViewState extends State<UploadView> {
                 ),
                 Gap(20),
                 TextFormField(
+                  inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[A-Za-z]'))],
+                  onChanged: (value) {
+                    setState(() {
+                      name=value;
+                    });
+
+                  },
                   decoration: InputDecoration(
                     hintText: 'Enter Your Name',
                     enabledBorder: OutlineInputBorder(
