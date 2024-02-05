@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:taskati/core/Widgets/customWidget.dart';
 import 'package:taskati/core/utils/app_colors.dart';
 import 'package:taskati/core/utils/text_styles.dart';
+import 'package:taskati/features/home/Widgets/home_header.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -22,22 +23,7 @@ class _HomeViewState extends State<HomeView> {
           padding: const EdgeInsets.all(20 ),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Hello,Ahmed',style: getTitleStyle(),),
-                      Text('Have A Nice Day ',style: getBodyStyle(),),
-                    ],
-                  ),
-                  CircleAvatar(
-                    backgroundImage: AssetImage('assets/user.png'),
-
-                  ),
-                ],
-              ),
+            HomeHeadder(),
               Gap(20),
               Row(
                 //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -61,7 +47,7 @@ class _HomeViewState extends State<HomeView> {
                 width:80,
                 DateTime.now(),
                 initialSelectedDate: DateTime.now(),
-                selectionColor: Colors.black,
+                selectionColor: AppColors.primaryColor,
                 selectedTextColor: Colors.white,
                 onDateChange: (date) {
                   // // New date selected
@@ -70,6 +56,48 @@ class _HomeViewState extends State<HomeView> {
                   //});
                 },
               ),
+              Expanded(child: ListView.builder(
+                itemCount: 3,
+                itemBuilder: (context, index){
+                return Container(
+                  margin: EdgeInsets.only(top: 10),
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryColor,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Flutter Task 1',style: getBodyStyle(color: AppColors.WhiteColor,),),
+                          Gap(5),
+                          Row(
+                            children: [
+                              Icon(Icons.watch_off_outlined,color: AppColors.WhiteColor,),
+                              Gap(10),
+                              Text('12:00 - 12:00',style: getSmallStyle(color: AppColors.greyColor,),),
+                            ],
+                          ),   Gap(5),
+                          Text('Flutter Task 1 Noteeeee',style: getBodyStyle(color: AppColors.WhiteColor,),),
+                        ],
+                      ),
+                      Spacer(),
+                      Container(
+                        width: .5,
+                        height: 50,
+                        color: AppColors.WhiteColor,
+                      ),
+                      Gap(5),
+                      RotatedBox(
+                          quarterTurns: 3,
+                          child: Text('TODO',style: getTitleStyle(color: AppColors.WhiteColor,fontsize: 18),)),
+                    ],
+                  ),
+                );
+
+              },)),
             ],
           ),
         ),

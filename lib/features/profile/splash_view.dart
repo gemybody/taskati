@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
+import 'package:taskati/core/utils/Network/local_storage.dart';
 import 'package:taskati/core/utils/text_styles.dart';
+import 'package:taskati/features/home/home_view.dart';
 
 import '../upload/uploadView.dart';
 
@@ -15,12 +17,16 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
-    // TODO: implement initState
       super.initState();
+     var isupload= Applocal.getcashedDate(Applocal.ISUPLOAD_key)??false;
+    print( Applocal.getcashedDate(Applocal.IMAGE_key)) ;
+      print(Applocal.getcashedDate(Applocal.NAME_key));
+
+
       Future.delayed(Duration(seconds: 4),
           (){
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context)=>UploadView(),));
+          builder: (context)=> isupload? const HomeView(): const UploadView(),));
           }
       );
   }
